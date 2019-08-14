@@ -1,25 +1,41 @@
 package com.flutter_google_cast_plugin;
 
-import io.flutter.plugin.common.MethodCall;
-import io.flutter.plugin.common.MethodChannel;
-import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
-import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
+import android.content.Context;
+import android.util.Log;
 
-/** FlutterGoogleCastPlugin */
-public class FlutterGoogleCastPlugin implements MethodCallHandler {
-  /** Plugin registration. */
-  public static void registerWith(Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutter_google_cast_plugin");
-    channel.setMethodCallHandler(new FlutterGoogleCastPlugin());
-  }
+import com.google.android.gms.cast.framework.CastContext;
 
-  @Override
-  public void onMethodCall(MethodCall call, Result result) {
-    if (call.method.equals("getPlatformVersion")) {
-      result.success("Android " + android.os.Build.VERSION.RELEASE);
-    } else {
-      result.notImplemented();
+import io.flutter.plugin.common.PluginRegistry;
+
+public class FlutterGoogleCastPlugin {
+    private static final String TAG = "FlutterGoogleCastPlugin";
+
+    public static void registerWith(PluginRegistry.Registrar registrar) {
+        Log.d(TAG, "registering plugin channels");
+
+        CastStateStreamHandler.registerWith(registrar);
+        RemoteMediaClientMethodCallHandler.registerWith(registrar);
+        SessionManagerMethodCallHandler.registerWith(registrar);
     }
-  }
+
+    private static Context context;
+    private static FlutterGoogleCastTheme theme;
+
+    public static Context getContext() {
+        return context;
+    }
+
+    public static void setContext(Context context) {
+        CastContext.getSharedInstance(context);
+        FlutterGoogleCastPlugin.context = context;
+    }
+
+    public static FlutterGoogleCastTheme getTheme() {
+        return theme;
+    }
+
+    public static void setTheme(FlutterGoogleCastTheme theme) {
+        FlutterGoogleCastPlugin.theme = theme;
+    }
+
 }

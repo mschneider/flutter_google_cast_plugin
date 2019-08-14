@@ -9,7 +9,7 @@ class CastStateBloc extends Bloc<int, CastState> {
   final Logger log = new Logger('CastStateBloc');
 
   CastStateBloc() {
-    SessionManager.castEventStream().listen((nativeEvent) {
+    SessionManager.castStateStream().listen((nativeEvent) {
       log.info("CastStateBloc received $nativeEvent");
       if (nativeEvent is int) {
         dispatch(nativeEvent - 1);

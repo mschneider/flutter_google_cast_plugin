@@ -49,6 +49,12 @@ class _MyAppState extends State<MyApp> {
             onPressed: () {
               SessionManager.endCurrentSession(true);
             },
+          ),
+          FlatButton(
+            child: Text('load'),
+            onPressed: () {
+              RemoteMediaClient.loadUrl("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4", "Selected Video");
+            },
           )
         ]),
       ),

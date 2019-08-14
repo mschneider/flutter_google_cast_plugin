@@ -32,6 +32,8 @@ class MediaQueueData {
   List<MediaQueueItem> items;
   String name;
   RepeatMode repeatMode;
+
+  MediaQueueData(this.items);
 }
 
 class MediaQueueItem {
@@ -53,8 +55,22 @@ class RemoteMediaClient {
     return result;
   }
 
-  static Future<Map> play() async {
-    final Map result = await _channel.invokeMethod('play');
-    return result;
+  static Future<Map> loadUrl(String url, String title) {
+    var mediaInfo = MediaInfo(url);
+    mediaInfo.contentType = 'video/mp4';
+    mediaInfo.streamType = StreamType.buffered;
+    mediaInfo.metadata = { "title": title };
+
+    var mediaQueueItem = MediaQueueItem(mediaInfo);
+    mediaQueueItem.autoplay = true;
+
+    var mediaQueueData = MediaQueueData([mediaQueueItem]);
+    mediaQueueData.repeatMode = RepeatMode.single;
+
+    var mediaLoadRequestData = MediaLoadRequestData();
+    mediaLoadRequestData.autoplay = true;
+    mediaLoadRequestData.queueData = mediaQueueData;
+
+    return load(mediaLoadRequestData);
   }
 }

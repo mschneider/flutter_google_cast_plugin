@@ -17,7 +17,7 @@ class SessionManager {
   static const EventChannel _castStateChannel =
       const EventChannel('flutter_google_cast_plugin.CastState');
 
-  static Stream<dynamic> castEventStream() {
+  static Stream<dynamic> castStateStream() {
     return _castStateChannel.receiveBroadcastStream();
   }
 }
