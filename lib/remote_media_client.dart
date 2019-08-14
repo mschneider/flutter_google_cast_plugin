@@ -8,12 +8,20 @@ enum StreamType { invalid, none, buffered, live }
 class MediaInfo {
   String contentId;
   String contentType;
-  Object customData;
   String entity;
   Map<String, dynamic> metadata;
   StreamType streamType;
 
   MediaInfo(this.contentId);
+
+  Map<String, dynamic> toJson() =>
+      {
+        "contentId" : contentId,
+        "contentType" : contentType,
+        "entity" : entity,
+        "metadata" : metadata,
+        "streamType" : streamType.toString(),
+      };
 }
 
 class MediaLoadRequestData {
@@ -22,10 +30,21 @@ class MediaLoadRequestData {
   String credentials;
   String credentialsType;
   int currentTime;
-  Object customData;
   MediaInfo mediaInfo;
   double playbackRate;
   MediaQueueData queueData;
+
+  Map<String, dynamic> toJson() =>
+      {
+        "activeTrackIds" : activeTrackIds,
+        "autoplay" : autoplay,
+        "credentials" : credentials,
+        "credentialsType" : credentialsType,
+        "currentTime" : currentTime,
+        "mediaInfo" : mediaInfo?.toJson(),
+        "playbackRate" : playbackRate,
+        "queueData" : queueData?.toJson()
+      };
 }
 
 class MediaQueueData {
@@ -34,15 +53,30 @@ class MediaQueueData {
   RepeatMode repeatMode;
 
   MediaQueueData(this.items);
+
+  Map<String, dynamic> toJson() =>
+      {
+        "items" : items.map((i) => i.toJson()).toList(),
+        "name" : name,
+        "repeatMode" : repeatMode.toString()
+      };
 }
 
 class MediaQueueItem {
   bool autoplay;
   MediaInfo mediaInfo;
-  int startIndex;
-  int startTime;
+  double playbackDuration;
+  double startTime;
 
   MediaQueueItem(this.mediaInfo);
+
+  Map<String, dynamic> toJson() =>
+      {
+        "autoplay" : autoplay,
+        "mediaInfo" : mediaInfo.toJson(),
+        "playbackDuration" : playbackDuration,
+        "startTime" : startTime
+      };
 }
 
 class RemoteMediaClient {
@@ -51,7 +85,7 @@ class RemoteMediaClient {
 
   static Future<Map> load(MediaLoadRequestData mediaLoadRequestData) async {
     final Map result =
-        await _channel.invokeMethod('load', mediaLoadRequestData);
+        await _channel.invokeMethod('load', mediaLoadRequestData.toJson());
     return result;
   }
 
