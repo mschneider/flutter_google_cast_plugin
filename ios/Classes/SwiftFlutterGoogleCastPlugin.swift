@@ -1,14 +1,20 @@
 import Flutter
+import GoogleCast
 import UIKit
 
 public class SwiftFlutterGoogleCastPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "flutter_google_cast_plugin", binaryMessenger: registrar.messenger())
-    let instance = SwiftFlutterGoogleCastPlugin()
-    registrar.addMethodCallDelegate(instance, channel: channel)
-  }
+    
+    DispatchQueue.main.async {
+        let discoveryCriteria = GCKDiscoveryCriteria(applicationID: kGCKDefaultMediaReceiverApplicationID)
+        let options = GCKCastOptions(discoveryCriteria: discoveryCriteria)
+        options.physicalVolumeButtonsWillControlDeviceVolume = true
+        GCKCastContext.setSharedInstanceWith(options)
+    }
 
-  public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    result("iOS " + UIDevice.current.systemVersion)
+    CastStateStreamHandler.register(with: registrar)
+    SessionManagerMethodCallHandler.register(with: registrar)
+    RemoteMediaClientMethodCallHandler.register(with: registrar)
   }
 }
+

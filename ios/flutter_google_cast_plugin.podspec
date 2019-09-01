@@ -16,6 +16,28 @@ Plugin that wraps the native Google Cast SDK
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
 
-  s.ios.deployment_target = '8.0'
+  s.frameworks =
+    "Accelerate",
+    "AudioToolbox",
+    "AVFoundation",
+    "CFNetwork",
+    "CoreBluetooth",
+    "CoreData",
+    "CoreGraphics",
+    "CoreMedia",
+    "CoreText",
+    "Foundation",
+    "MediaAccessibility",
+    "MediaPlayer",
+    "QuartzCore",
+    "Security",
+    "SystemConfiguration",
+    "UIKit",
+    "GoogleCast"
+
+  s.preserve_path = "Frameworks/GoogleCastSDK-4.4.4/*"
+  s.vendored_frameworks = 'Frameworks/GoogleCastSDK-4.4.4/GoogleCast.framework'
+
+  s.ios.deployment_target = '9.0'
 end
 

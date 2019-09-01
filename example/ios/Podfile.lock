@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_google_cast_plugin (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_google_cast_plugin (from `.symlinks/plugins/flutter_google_cast_plugin/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  flutter_google_cast_plugin:
+    :path: ".symlinks/plugins/flutter_google_cast_plugin/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  flutter_google_cast_plugin: 527def795c624f7ddb084f4b16e73f6b7adf5428
+
+PODFILE CHECKSUM: 321e6b95a1e0359ffc032457e0dd938e1fda9ed4
+
+COCOAPODS: 1.7.3
