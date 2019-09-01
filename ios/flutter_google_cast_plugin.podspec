@@ -37,6 +37,7 @@ Plugin that wraps the native Google Cast SDK
 
   s.preserve_path = "Frameworks/GoogleCastSDK-4.4.4/*"
   s.vendored_frameworks = 'Frameworks/GoogleCastSDK-4.4.4/GoogleCast.framework'
+  s.swift_version = "4.2"
 
   s.ios.deployment_target = '9.0'
 end

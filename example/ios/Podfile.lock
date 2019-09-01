@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
-  flutter_google_cast_plugin: 527def795c624f7ddb084f4b16e73f6b7adf5428
+  flutter_google_cast_plugin: 6e6497fcd49a92be78c32d68e6a65babdb08e65b
 
 PODFILE CHECKSUM: 321e6b95a1e0359ffc032457e0dd938e1fda9ed4
 
