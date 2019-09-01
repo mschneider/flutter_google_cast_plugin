@@ -88,7 +88,7 @@ public class RemoteMediaClientMethodCallHandler implements MethodChannel.MethodC
                 builder.setContentType((String) serialized.get("contentType"));
             }
             if (serialized.get("entity") != null) {
-                builder.setContentType((String) serialized.get("entity"));
+                builder.setEntity((String) serialized.get("entity"));
             }
             if (serialized.get("streamType") != null) {
                 switch ((String)serialized.get("streamType")) {
@@ -121,7 +121,6 @@ public class RemoteMediaClientMethodCallHandler implements MethodChannel.MethodC
         public MediaQueueItem getMediaQueueItem() {
             MediaInfo mediaInfo = new MediaInfoDeserializer(this.serialized.get("mediaInfo")).getMediaInfo();
             MediaQueueItem.Builder builder = new MediaQueueItem.Builder(mediaInfo);
-
 
             if (serialized.get("autoplay") != null) {
                 builder.setAutoplay((Boolean) serialized.get("autoplay"));

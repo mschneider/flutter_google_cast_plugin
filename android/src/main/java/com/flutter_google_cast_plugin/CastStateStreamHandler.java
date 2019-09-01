@@ -29,7 +29,7 @@ public class CastStateStreamHandler implements EventChannel.StreamHandler {
         CastContext context = CastContext.getSharedInstance();
         context.addCastStateListener(castStateListener);
 
-        // synchonize last state
+        // synchronize last state
         lastState = context.getCastState();
         sink.success(lastState);
     }
